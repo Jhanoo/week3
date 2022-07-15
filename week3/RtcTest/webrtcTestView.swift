@@ -13,24 +13,35 @@ class EscapingViewModel: ObservableObject {
     
     init() {
         rooms = []
+        doSomething()
     }
     
     func updateFromFire(completion: @escaping ([String]) -> Void) {
-        var docArr : [String] = []
-        db.collection("rooms").getDocuments() { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting doucments: \(error)")
+        db.collection("rooms").addSnapshotListener{ [self] snapshot, error in
+            print("rooms refresh")
+            guard snapshot != nil else {
+                print("Error fetching document: \(error!)")
+                return
             }
-            else {
-                for document in querySnapshot!.documents{
-                    print("document ID = \(document.documentID)")
-                    docArr.append(document.documentID)
+            
+            var docArr : [String] = []
+            db.collection("rooms").getDocuments() { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting doucments: \(error)")
                 }
+                else {
+                    for document in querySnapshot!.documents{
+                        print("document ID = \(document.documentID)")
+                        docArr.append(document.documentID)
+                    }
 
-                completion(docArr)
-                print("updateFromFIre")
+                    completion(docArr)
+                    print("updateFromFIre")
+                }
             }
+            
         }
+        
     }
     
     func doSomething() {
@@ -59,12 +70,19 @@ struct webrtcTestView: View {
         roomRef = nil
         //            roomRef = myR
         myRoom = Room.init()
-        ViewModel.doSomething()
     }
     
     
     var body: some View {
-        
+        List(ViewModel.rooms, id: \.self){roomID in
+            Button(action: {
+                myRoom.roomId = roomID
+                myRoom.joinRoom(webRTCClient: webRTCClient)
+                
+            }) {
+                Text(roomID)
+            }
+        }
         
         Button {
             roomRef = myRoom.createRoom(webRTCClient: webRTCClient)
@@ -73,12 +91,6 @@ struct webrtcTestView: View {
         } label: {
             Text("create")
         }
-        Button {
-            myRoom.joinRoom(webRTCClient: webRTCClient)
-        } label: {
-            Text("join")
-        }
-
         
     }
 }

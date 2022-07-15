@@ -17,7 +17,7 @@ let db = Firestore.firestore()
 
 class Room: Codable {
     var rooms: [String]
-    private var roomId: String?
+    var roomId: String?
     private var caller: Int?
     private var callee: Int?
     
