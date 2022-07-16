@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseFirestore
+import WebRTC
 
 class EscapingViewModel: ObservableObject {
     @Published var rooms: [String]
@@ -52,7 +53,7 @@ class EscapingViewModel: ObservableObject {
     
 }
 
-struct webrtcTestView: View {
+struct WebrtcTestView: View {
     @StateObject var ViewModel = EscapingViewModel()
     struct roomInfo: Identifiable{
         var id = UUID()
@@ -97,6 +98,7 @@ struct webrtcTestView: View {
 
 struct webrtcTest_Previews: PreviewProvider {
     static var previews: some View {
-        webrtcTestView()
+        WebrtcTestView()
     }
 }
+

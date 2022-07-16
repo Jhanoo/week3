@@ -267,7 +267,8 @@ class WebRTCClient: NSObject {
         }
         let roomRef = db.collection("rooms").document(self.roomId!)
         
-        let candidatesCollection = roomRef.collection("calleeCandidates")
+        var candidatesCollection = roomRef.collection("calleeCandidates")
+        
         print(candidatesCollection.collectionID)
 
         
@@ -395,3 +396,83 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     
 }
 
+extension WebRTCClient: WebRTCClientDelegate {
+    func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
+        print("did discover local candidate")
+        client.sendCandidate(candidate: candidate)
+    }
+    
+    func webRTCClient(_ client: WebRTCClient, didCreateLocalCapturer capturer: RTCCameraVideoCapturer) {
+//        DispatchQueue.main.async {
+//            print("did create local capturer -> local render")
+//            let localRenderer = RTCMTLVideoView(frame: CGRect(x: 0, y: 0, width: self.localVideoView.frame.width, height: self.localVideoView.frame.height))
+//            localRenderer.videoContentMode = .scaleAspectFill
+//            client.startCaptureLocalVideo(renderer: localRenderer)
+//            self.localVideoView.addSubview(localRenderer)
+//            self.localVideoView.layoutIfNeeded()
+//        }
+    }
+    
+    func webRTCClient(_ client: WebRTCClient, didChangeSignaling stateChanged: RTCSignalingState) {
+        DispatchQueue.main.async { [self] in
+            if stateChanged.rawValue == 1 || stateChanged.rawValue == 3 { //  have local/remote offer
+                print("signaling have offer -> local render")
+                let localRenderer = RTCMTLVideoView(frame: CGRect(x: 0, y: 0, width: localVideoView.frame.width, height: localVideoView.frame.height))
+                localRenderer.videoContentMode = .scaleAspectFill
+                client.startCaptureLocalVideo(renderer: localRenderer, front: self.frontcamera)
+                localVideoView.addSubview(localRenderer)
+                localVideoView.layoutIfNeeded()
+                
+                micButton.isEnabled = true
+                cameraButton.isEnabled = true
+            }
+        }
+    }
+    
+    func webRTCClient(_ client: WebRTCClient, didChangeIceConnection newState: RTCIceConnectionState) {
+        DispatchQueue.main.async { [self] in
+            if newState.rawValue == 2 { // connected
+                print("ice connection connected -> remote render")
+                let remoteRenderer = RTCMTLVideoView(frame: CGRect(x: 0, y: 0, width: remoteVideoView.frame.width, height: remoteVideoView.frame.height))
+                remoteRenderer.videoContentMode = .scaleAspectFill
+                client.renderRemoteVideo(to: remoteRenderer)
+                remoteVideoView.addSubview(remoteRenderer)
+                remoteVideoView.layoutIfNeeded()
+            }
+            
+            else if newState.rawValue == 4 || newState.rawValue == 5 || newState.rawValue == 6 { // failed, disconnected, closed
+                initVideoView()
+                
+                let r = myAvatar?.position[0]
+                let c = myAvatar?.position[1]
+                
+                // 미팅 안 없어졌으면 hangup
+                for i in 0...3 {
+                    let m = myVillage?.meetingRooms[i]
+                    if (m?.caller?.position[0] == r && m?.caller?.position[1] == c) || (m?.callee?.position[0] == r && m?.callee?.position[1] == c) {
+                        if m?.isRoomOpened == true {
+                            m?.hangUp(webRTCClient: self.webRTCClient)
+                        }
+                        break
+                    }
+                }
+                
+                micButton.isEnabled = false
+                cameraButton.isEnabled = false
+            }
+        }
+        
+    }
+    
+    func webRTCClient(_ client: WebRTCClient, didAdd stream: RTCMediaStream) {
+//        DispatchQueue.main.async {
+//            print("did add stream -> remote render")
+//            let remoteRenderer = RTCMTLVideoView(frame: CGRect(x: 0, y: 0, width: self.remoteVideoView.frame.width, height: self.remoteVideoView.frame.height))
+//            remoteRenderer.videoContentMode = .scaleAspectFill
+//            client.renderRemoteVideo(to: remoteRenderer)
+//            self.remoteVideoView.addSubview(remoteRenderer)
+//            self.remoteVideoView.layoutIfNeeded()
+//        }
+    }
+    
+}

@@ -23,7 +23,7 @@ struct week3App: App {
         WindowGroup {
             // onOpenURL() URL 스킴 처리
             // 특정 스킴 값을 호출하면 특정앱이 오픈된다. 리스너 설치하는 느낌
-            webrtcTestView()
+            WebrtcTestView()
         }
     }
 }

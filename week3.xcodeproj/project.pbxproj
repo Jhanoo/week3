@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		422F8F232880FAB30001E1D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 422F8F222880FAB30001E1D4 /* GoogleService-Info.plist */; };
-		42E4573728801B7400DB4731 /* webRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4573628801B7400DB4731 /* webRTCClient.swift */; };
-		42E4573A28803B1900DB4731 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42E4573928803B1900DB4731 /* FirebaseAnalyticsSwift */; };
-		42E4573C28803B1900DB4731 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42E4573B28803B1900DB4731 /* FirebaseFirestoreSwift */; };
-		42E457402880539300DB4731 /* MeetingRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4573F2880539300DB4731 /* MeetingRoom.swift */; };
 		42E7CE49287EC665003F082C /* week3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E7CE48287EC665003F082C /* week3App.swift */; };
 		42E7CE4B287EC665003F082C /* MainView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E7CE4A287EC665003F082C /* MainView1.swift */; };
 		42E7CE4D287EC666003F082C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E7CE4C287EC666003F082C /* Assets.xcassets */; };
@@ -26,7 +21,7 @@
 		93A2E52F2880384200D32840 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93A2E52E2880384200D32840 /* FirebaseAnalyticsSwift */; };
 		93A2E5312880384200D32840 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93A2E5302880384200D32840 /* FirebaseFirestoreSwift */; };
 		93A2E53428803AE000D32840 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A2E53328803AE000D32840 /* Room.swift */; };
-		93FCC4AC2880148B00515895 /* webrtcTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FCC4AB2880148B00515895 /* webrtcTestView.swift */; };
+		93FCC4AC2880148B00515895 /* WebrtcTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FCC4AB2880148B00515895 /* WebrtcTestView.swift */; };
 		93FCC4AF288014F700515895 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FCC4AE288014F700515895 /* WebRTCClient.swift */; };
 		A7397A95A2A3340AC4CCF1B6 /* Pods_week3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA974F83F81BFC98F70EA9EA /* Pods_week3.framework */; };
 /* End PBXBuildFile section */
@@ -44,7 +39,7 @@
 		42E7CE64287FD9AF003F082C /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		93A2E52B2880371100D32840 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93A2E53328803AE000D32840 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
-		93FCC4AB2880148B00515895 /* webrtcTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webrtcTestView.swift; sourceTree = "<group>"; };
+		93FCC4AB2880148B00515895 /* WebrtcTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebrtcTestView.swift; sourceTree = "<group>"; };
 		93FCC4AE288014F700515895 /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		EA974F83F81BFC98F70EA9EA /* Pods_week3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_week3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D9CD5C37092B28A507EDB3 /* Pods-week3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-week3.release.xcconfig"; path = "Target Support Files/Pods-week3/Pods-week3.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,8 +117,6 @@
 				42E45733287FF3E900DB4731 /* Login */,
 				42E7CE4C287EC666003F082C /* Assets.xcassets */,
 				42E7CE4E287EC666003F082C /* Preview Content */,
-				42E4573628801B7400DB4731 /* webRTCClient.swift */,
-				42E4573F2880539300DB4731 /* MeetingRoom.swift */,
 			);
 			path = week3;
 			sourceTree = "<group>";
@@ -139,7 +132,7 @@
 		93FCC4AD288014D600515895 /* RtcTest */ = {
 			isa = PBXGroup;
 			children = (
-				93FCC4AB2880148B00515895 /* webrtcTestView.swift */,
+				93FCC4AB2880148B00515895 /* WebrtcTestView.swift */,
 				93FCC4AE288014F700515895 /* WebRTCClient.swift */,
 				93A2E53328803AE000D32840 /* Room.swift */,
 			);
@@ -294,7 +287,7 @@
 				93A2E53428803AE000D32840 /* Room.swift in Sources */,
 				42E7CE63287FB75F003F082C /* initialView.swift in Sources */,
 				42E7CE49287EC665003F082C /* week3App.swift in Sources */,
-				93FCC4AC2880148B00515895 /* webrtcTestView.swift in Sources */,
+				93FCC4AC2880148B00515895 /* WebrtcTestView.swift in Sources */,
 				93FCC4AF288014F700515895 /* WebRTCClient.swift in Sources */,
 				42E7CE65287FD9AF003F082C /* IntroView.swift in Sources */,
 			);
@@ -511,14 +504,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		42E4573828803B1900DB4731 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 		42E7CE56287EEEF9003F082C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
@@ -538,16 +523,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		42E4573928803B1900DB4731 /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 42E4573828803B1900DB4731 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
-		};
-		42E4573B28803B1900DB4731 /* FirebaseFirestoreSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 42E4573828803B1900DB4731 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestoreSwift;
-		};
 		42E7CE57287EEEF9003F082C /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 42E7CE56287EEEF9003F082C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
