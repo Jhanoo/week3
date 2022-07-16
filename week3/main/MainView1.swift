@@ -10,15 +10,6 @@ import SwiftUI
 import UIKit
 import WebRTC
 
-let bounds: CGRect = UIScreen.main.bounds
-var centerX: CGFloat = bounds.width / 2
-var videoWidth: CGFloat = centerX
-var videoHeight: CGFloat = centerX
-
-let webRTCClient: WebRTCClient = WebRTCClient()
-let localRenderer = RTCMTLVideoView()
-let remoteRenderer = RTCMTLVideoView()
-
 struct MainView1: View {
     var body: some View {
         HStack {
@@ -41,22 +32,3 @@ struct ContentView_Previews: PreviewProvider {
         MainView1()
     }
 }
-
-struct localVideoView: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView {
-        return localRenderer
-    }
-    
-    func updateUIView(_ view: UIView, context: Context) {
-    }
-}
-
-struct remoteVideoView: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView {
-        return remoteRenderer
-    }
-    
-    func updateUIView(_ view: UIView, context: Context) {
-    }
-}
-

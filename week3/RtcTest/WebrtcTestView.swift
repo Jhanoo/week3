@@ -5,9 +5,20 @@
 //  Created by Chanwoo on 2022/07/14.
 //
 
+import AVFoundation
 import SwiftUI
 import FirebaseFirestore
 import WebRTC
+
+var webRTCClient: WebRTCClient = WebRTCClient()
+let bounds: CGRect = UIScreen.main.bounds
+var centerX: CGFloat = bounds.width / 2
+var videoWidth: CGFloat = centerX
+var videoHeight: CGFloat = centerX
+
+let localRenderer = RTCMTLVideoView()
+let remoteRenderer = RTCMTLVideoView()
+
 
 class EscapingViewModel: ObservableObject {
     @Published var rooms: [String]
@@ -61,8 +72,6 @@ struct WebrtcTestView: View {
     }
     
     @State private var selection = Set<UUID>()
-    
-    var webRTCClient: WebRTCClient = WebRTCClient()
     @State var myRoom: Room
     @State var roomRef: DocumentReference?
     
@@ -93,12 +102,42 @@ struct WebrtcTestView: View {
             Text("create")
         }
         
+        HStack {
+            localVideoView()
+                .frame(width: videoWidth, height: videoHeight)
+            Spacer()
+            remoteVideoView()
+                .frame(width: videoWidth, height: videoHeight)
+        }.onAppear {
+            webRTCClient.createPeerConnection()
+            webRTCClient.renderRemoteVideo(to: remoteRenderer)
+            webRTCClient.startCaptureLocalVideo(renderer: localRenderer, front: true)
+        }
+        
     }
 }
 
 struct webrtcTest_Previews: PreviewProvider {
     static var previews: some View {
         WebrtcTestView()
+    }
+}
+
+struct localVideoView: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        return localRenderer
+    }
+    
+    func updateUIView(_ view: UIView, context: Context) {
+    }
+}
+
+struct remoteVideoView: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        return remoteRenderer
+    }
+    
+    func updateUIView(_ view: UIView, context: Context) {
     }
 }
 
