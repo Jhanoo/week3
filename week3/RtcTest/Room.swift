@@ -16,13 +16,12 @@ import FirebaseCore
 let db = Firestore.firestore()
 
 class Room: Codable {
-    var rooms: [String]
+//    var rooms: [String]
     var roomId: String?
     private var caller: Int?
     private var callee: Int?
     
     init(){
-        self.rooms = []
         self.caller = nil
         self.callee = nil
         self.roomId = nil
@@ -34,7 +33,6 @@ class Room: Codable {
         webRTCClient.createPeerConnection()
         
         let callerCandidatesCollection = roomRef.collection("callerCandidates")
-        
         webRTCClient.createOffer(roomRef: roomRef){ _ in
             print("create offer success")
         }
